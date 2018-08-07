@@ -19,14 +19,12 @@ done
 
 if [[ $cmd = "up" ]]; then
 	if [[ octopus -eq 1 ]]; then
+		echo "Replacing '.env' file with '.octopus.env'"
 		mv ./.env ./.env.old
 		mv ./octopus.env ./.env
 	fi
-	docker-compose --project-name $project_name  up -d
+	#docker-compose pushes non errors onto stderr. Redirect to stdout
+	docker-compose --project-name $project_name  up -d  2>&1
 else
-	docker-compose --project-name $project_name  $cmd
+	docker-compose --project-name $project_name  $cmd  2>&1
 fi
-
-#printf "Argument octopus is %s\n" "$octopus"
-#printf "Argument project_name is %s\n" "$project_name"
-#printf "Argument cmd is %s\n" "$cmd"
