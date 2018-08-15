@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    image: ${WEB_IMAGE}:${WEB_TAG}
+    ports:
+     - "${WEB_PORT}:5000"
+    environment:
+      - text=${TEXT_MESSAGE}
+  redis:
+    image: ${DB_IMAGE}:${DB_TAG}
